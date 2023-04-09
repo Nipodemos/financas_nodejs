@@ -35,8 +35,10 @@ export async function initDB() {
       });
 
     await db.use("test", "test");
+    return true;
   } catch (err) {
     console.error(err);
+    return false;
   }
 }
 export default db;
