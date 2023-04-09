@@ -6,6 +6,19 @@ const db = new Surreal(process.env.SURREAL_DB_HOST);
 export async function initDB() {
   try {
     console.log("Initializing database...");
+    console.log(
+      "process.env.SURREAL_DB_PASSWORD :>> ",
+      process.env.SURREAL_DB_PASSWORD
+    );
+    console.log(
+      "process.env.SURREAL_DB_USER :>> ",
+      process.env.SURREAL_DB_USER
+    );
+    console.log(
+      "process.env.SURREAL_DB_HOST :>> ",
+      process.env.SURREAL_DB_HOST
+    );
+    console.log("process.env.PORT :>> ", process.env.PORT);
     if (
       !process.env.SURREAL_DB_USER ||
       !process.env.SURREAL_DB_PASSWORD ||
@@ -34,7 +47,7 @@ export async function initDB() {
         console.log("Error signing in to database", err);
       });
 
-    await db.use("test", "test");
+    await db.use("test", "financas");
     return true;
   } catch (err) {
     console.error(err);
