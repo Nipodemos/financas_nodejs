@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotEnvExtended from "dotenv-extended";
-import { initDB } from "./connection";
+import db, { initDB } from "./connection";
 dotEnvExtended.load();
 initDB()
   .then((estaConectado) => {
@@ -15,7 +15,36 @@ initDB()
         res.send("All systems operational");
       });
 
-      router.get("/criar_usuario", (req, res) => {
+      type criarUsuarioBody = {
+        nome: string;
+        email: string;
+        senha: string;
+      };
+      router.get("/criar_usuario", async (req, res) => {
+        let { nome, email, senha }: criarUsuarioBody = req.body;
+        console.log({ nome, email, senha });
+
+        if (!nome || !email || !senha) {
+          res.status(400).send("Dados inválidos");
+          return;
+        }
+
+        if (senha.length < 6) {
+          res.status(400).send("Senha muito curta");
+          return;
+        }
+
+        let usuario = await db.query("SELECT COUNT()", { email });
+        if (usuario) {
+          res.status(400).send("Usuário já existe");
+          return;
+        }
+
+        let created = await db.create("usuario", {
+          nome,
+          email,
+          senha,
+        });
         res.send("Criando usuário");
       });
 
