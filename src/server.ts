@@ -4,21 +4,20 @@ import dotEnvExtended from "dotenv-extended";
 import { initDB } from "../connection";
 import todasAsRotas from "./routes/allRoutes";
 dotEnvExtended.load();
+const server = express();
 
 async function main() {
   await initDB();
-  const app = express();
   const router = express.Router();
 
   router.get("/", async (req, res) => {
     res.send("All systems operational");
   });
-  app.use(cors());
-  app.use(todasAsRotas);
-  app.use(router);
-  app.listen(process.env.PORT, () => {
-    console.log("Listening on port " + process.env.PORT);
-  });
+  server.use(cors());
+  server.use(todasAsRotas);
+  server.use(router);
 }
 
 main();
+
+export default server;
