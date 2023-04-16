@@ -9,10 +9,6 @@ const { SURREAL_DB_PASSWORD, SURREAL_DB_USER, SURREAL_DB_HOST, PORT } =
 export async function initDB() {
   try {
     console.log("Initializing database...");
-    console.log("SURREAL_DB_PASSWORD :>> ", SURREAL_DB_PASSWORD);
-    console.log("SURREAL_DB_USER :>> ", SURREAL_DB_USER);
-    console.log("SURREAL_DB_HOST :>> ", SURREAL_DB_HOST);
-    console.log("PORT :>> ", PORT);
     if (!SURREAL_DB_USER || !SURREAL_DB_PASSWORD || !SURREAL_DB_HOST) {
       throw new Error("SURREAL_DB_USERNAME or DB_PASSWORD not set");
     }
