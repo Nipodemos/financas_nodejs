@@ -97,6 +97,13 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  },
+  "exclude": [
+    "./coverage",
+    "./dist",
+    "__tests__",
+    "jest.config.js"
+  ], /* Exclude files and folders from type checking. */
   "ts-node": {
     "transpileOnly": true,
     "files": true
