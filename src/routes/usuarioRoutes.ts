@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import db from "../connection";
+import db from "../../connection";
 import { z } from "zod";
 
 const usuarioRouter = Router();
