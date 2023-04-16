@@ -1,10 +1,9 @@
-define table categoria_receita schemafull;
-DEFINE FIELD nome ON TABLE categoria_receita TYPE string
+define table categoria schemafull;
+DEFINE FIELD nome ON TABLE categoria TYPE string
   ASSERT $value != NONE;
-
-define table categoria_despesa schemafull;
-define field nome on table categoria_despesa type string
-  assert $value != NONE;
+DEFINE FIELD tipo ON TABLE categoria TYPE string
+  ASSERT $value != NONE and $value inside ['receita', 'despesa'];
+DEFINE INDEX categoria_index ON TABLE categoria COLUMNS nome UNIQUE;
 
 define table cartao_debito schemafull;
 define field nome on table cartao_debito type string
@@ -13,6 +12,7 @@ define field valor_inicial on table cartao_debito type int
   VALUE $value OR 0;
 define field ativo on table cartao_debito type bool
   value true;
+DEFINE INDEX cartao_debito_index ON TABLE cartao_debito COLUMNS nome UNIQUE;
 
 define table cartao_credito schemafull;
 define field nome on table cartao_credito type string
@@ -21,6 +21,7 @@ define field valor_inicial on table cartao_credito type int
   VALUE $value OR 0;
 define field ativo on table cartao_credito type bool
   value true;
+DEFINE INDEX cartao_credito_index ON TABLE cartao_credito COLUMNS nome UNIQUE;
 
 define table usuario schemafull;
 define field nome on table usuario type string
@@ -29,6 +30,7 @@ define field email on table usuario type string
   assert $value != NONE and is::email($value);
 define field senha on table usuario type string
   assert $value != NONE;
+DEFINE INDEX userEmailIndex ON TABLE usuario COLUMNS email UNIQUE;
 
 
 define table transacao schemafull;
