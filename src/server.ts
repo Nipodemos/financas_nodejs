@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotEnvExtended from "dotenv-extended";
 import { initDB } from "./connection";
-import todasAsRotas from "./routes/allRoutes";
+import todasAsRotas from "./src/routes/allRoutes";
 dotEnvExtended.load();
 
 async function main() {
